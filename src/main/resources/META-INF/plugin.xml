@@ -1,8 +1,8 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.davidqmora.luna</id>
-    <name>luna</name>
-    <vendor>davidqmora</vendor>
+    <name>Luna</name>
+    <vendor>David Mora</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 

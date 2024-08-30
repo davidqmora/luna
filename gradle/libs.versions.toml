@@ -8,6 +8,7 @@ intelliJPlatform = "2.0.1"
 kotlin = "2.0.20"
 kover = "0.8.3"
 qodana = "2024.1.9"
+platformSettings = "2.0.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -18,3 +19,4 @@ intelliJPlatform = { id = "org.jetbrains.intellij.platform", version.ref = "inte
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 qodana = { id = "org.jetbrains.qodana", version.ref = "qodana" }
+platformSettings = { id = "org.jetbrains.intellij.platform.settings", version.ref = "platformSettings" }
