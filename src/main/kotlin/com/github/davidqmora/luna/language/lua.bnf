@@ -1,0 +1,194 @@
+{
+  parserClass="com.github.davidqmora.luna.language.parser.LuaParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Lua"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.github.davidqmora.luna.language.psi"
+  psiImplPackage="com.github.davidqmora.luna.language.psi.impl"
+
+  elementTypeHolderClass="com.github.davidqmora.luna.language.psi.LuaTypes"
+  elementTypeClass="com.github.davidqmora.luna.language.psi.LuaElementType"
+  tokenTypeClass="com.github.davidqmora.luna.language.psi.LuaTokenType"
+
+  psiImplUtilClass="com.github.davidqmora.luna.language.psi.impl.LuaPsiImplUtil"
+}
+
+simpleFile ::= item_*
+
+private item_ ::= (property|COMMENT|CRLF)
+
+property ::= (KEY? SEPARATOR VALUE?) | KEY
+{
+    methods=[getKey getValue]
+}
+
+
+
+// Complete syntax definition for the Lua language 5.4.7
+//
+//	chunk ::= block
+//
+//	block ::= {stat} [retstat]
+//
+//	stat ::=  ';' |
+//		 varlist '=' explist |
+//		 functioncall |
+//		 label |
+//		 break |
+//		 goto id |
+//		 do block end |
+//		 while exp do block end |
+//		 repeat block until exp |
+//		 if exp then block {elseif exp then block} [else block] end |
+//		 for id '=' exp ',' exp [',' exp] do block end |
+//		 for idlist in explist do block end |
+//		 function funcid funcbody |
+//		 local function id funcbody |
+//		 local attidlist ['=' explist]
+//
+//	attidlist ::=  id attrib {',' id attrib}
+//
+//	attrib ::= ['<' id '>']
+//
+//	retstat ::= return [explist] [';']
+//
+//	label ::= '::' id '::'
+//
+//	funcid ::= id {'.' id} [':' id]
+//
+//	varlist ::= var {',' var}
+//
+//	var ::=  id | prefixexp '[' exp ']' | prefixexp '.' id
+//
+//	idlist ::= id {',' id}
+//
+//	explist ::= exp {',' exp}
+//
+//	exp ::=  nil | false | true | number | string | '...' | functiondef |
+//		 prefixexp | tableconstructor | exp binop exp | unop exp
+//
+//	prefixexp ::= var | functioncall | '(' exp ')'
+//
+//	functioncall ::=  prefixexp args | prefixexp ':' id args
+//
+//	args ::=  '(' [explist] ')' | tableconstructor | string
+//
+//	functiondef ::= function funcbody
+//
+//	funcbody ::= '(' [parlist] ')' block end
+//
+//	parlist ::= idlist [',' '...'] | '...'
+//
+//	tableconstructor ::= '{' [fieldlist] '}'
+//
+//	fieldlist ::= field {fieldsep field} [fieldsep]
+//
+//	field ::= '[' exp ']' '=' exp | id '=' exp | exp
+//
+//	fieldsep ::= ',' | ';'
+//
+//	binop ::=  '+' | '-' | '*' | '/' | '//' | '^' | '%' |
+//		 '&' | '~' | '|' | '>>' | '<<' | '..' |
+//		 '<' | '<=' | '>' | '>=' | '==' | '~=' |
+//		 and | or
+//
+//	unop ::= '-' | not | '#' | '~'
+
+
+//{
+//    parserClass = "com.github.davidqmora.luna.language.parser.LuaParserDefinition"
+//  parserUtilClass="com.github.davidqmora.luna.language.parser.LuaParserDefinitionParserUtil"
+//    extends = "com.intellij.extapi.psi.ASTWrapperPsiElement"
+//
+//    psiClassPrefix = "Lua"
+//    psiImplClassSuffix = "Impl"
+//    psiPackage = "com.github.davidqmora.luna.language.psi"
+//    psiImplPackage = "com.github.davidqmora.luna.language.psi.impl"
+//
+//    tokens = [
+//        id='regexp:\p{Alpha}\w*'
+//        number='regexp:\d+(\.\d*)?'
+//        string='regexp:"[^"]*"'
+//    ]
+//}
+//
+//
+//chunk ::= block
+//
+//block ::= {stat} [retstat]
+//
+//stat ::=  ';' |
+////     varlist '=' explist |
+////     functioncall |
+//     label |
+//     break |
+//     goto id |
+//     do block end |
+////     while exp do block end |
+////     repeat block until exp |
+////     if exp then block {elseif exp then block} [else block] end |
+////     for id '=' exp ',' exp [',' exp] do block end |
+////     for idlist in explist do block end |
+////     function funcid funcbody |
+////     local function id funcbody |
+////     local attidlist ['=' explist]
+//
+////attidlist ::=  id attrib {',' id attrib}
+//
+////attrib ::= ['<' id '>']
+//
+//retstat ::= return [explist] [';']
+//
+//label ::= '::' id '::'
+//
+////funcid ::= id {'.' id} [':' id]
+//
+////varlist ::= var {',' var}
+//
+////var ::=  id | prefixexp '[' exp ']' | prefixexp '.' id
+//var ::=  id
+//
+////idlist ::= id {',' id}
+//
+////explist ::= var
+//
+////explist ::= exp {',' exp}
+////
+////exp ::= exp1 {binop exp1} | unaryexp
+////
+//////exp ::=  nil | false | true | number | string | '...' | functiondef | prefixexp | tableconstructor | exp binop exp | unop exp
+////exp1 ::=  prefixexp | nil | false | true | number | string | '...' | functiondef | tableconstructor
+////
+////unaryexp ::= unop exp
+////
+//////prefixexp ::= var | functioncall | '(' exp ')'
+////prefixexp ::= var | functioncall | '(' exp ')'
+////
+//////functioncall ::=  prefixexp args | prefixexp ':' id args
+////functioncall ::=  prefixexp args | prefixexp ':' id args
+////
+////args ::=  '(' [explist] ')' | tableconstructor | string
+////
+////functiondef ::= function funcbody
+////
+////funcbody ::= '(' [parlist] ')' block end
+////
+////parlist ::= idlist [',' '...'] | '...'
+////
+////tableconstructor ::= '{' [fieldlist] '}'
+////
+////fieldlist ::= field {fieldsep field} [fieldsep]
+////
+////field ::= '[' exp ']' '=' exp | id '=' exp | exp
+////
+////fieldsep ::= ',' | ';'
+////
+////binop ::=  '+' | '-' | '*' | '/' | '//' | '^' | '%' |
+////     '&' | '~' | '|' | '>>' | '<<' | '..' |
+////     '<' | '<=' | '>' | '>=' | '==' | '~=' |
+////     and | or
+////
+////unop ::= '-' | not | '#' | '~'
+//
